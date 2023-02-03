@@ -9,6 +9,4 @@ export const AppConfig = (app: Application) =>{
     app.use(express.json());
 
     // configuring my routes for my application
-
-
 }
