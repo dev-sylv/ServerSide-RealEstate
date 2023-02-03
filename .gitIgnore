@@ -5,3 +5,5 @@
 ./env
 
 ./gitIgnore
+
+./../Cloudinary.ts
