@@ -12,9 +12,9 @@ export const PostHouses = AsyncHandler(
     async(req: Request, res: Response, next: NextFunction): Promise<Response> =>{
         const {houseName, houseDescription, housePrice, bedrooms, bathrooms, houseImage, houseRentage, houseLocation, agentname} = req.body;
 
-        // const cloud_Img = await cloudinary.uploader.upload(req?.file!.path);
+        const cloud_Img = await cloudinary.uploader.upload(req?.file!.path);
 
-        const Agent = await AgentsModel.findById(req.params.agenthouseID)
+        const Agent = await AgentsModel.findById(req.params.agentID)
 
         if (!req.body) {
             next(
@@ -32,8 +32,8 @@ export const PostHouses = AsyncHandler(
             housePrice,
             bedrooms,
             bathrooms,
-            // houseImage: cloud_Img.secure_url,
-            houseImage,
+            houseImage: cloud_Img.secure_url,
+            // houseImage,
             houseRentage,
             houseLocation,
             agentname: Agent?.name,
@@ -60,7 +60,9 @@ export const PostHouses = AsyncHandler(
 // Get All Houses:
 export const GetHouse = AsyncHandler(
     async(req: Request, res: Response, next: NextFunction): Promise<Response> =>{
-        const house = await HouseModels.find().sort({createdAt: -1});
+        const house = await AgentsModel.findById(req.params.agentID).populate({
+            path: "houses"
+        });
         if (!house) {
             next(
                 new AppError({

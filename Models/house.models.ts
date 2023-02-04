@@ -45,9 +45,7 @@ const HouseSchema: Schema<Houses> = new Schema({
         trim: true,
     },
     agentname: {
-        type: String,
-        required: [true, "Please enter the agent that's posting the house"],
-        trim: true
+        type: String
     }
 });
 
