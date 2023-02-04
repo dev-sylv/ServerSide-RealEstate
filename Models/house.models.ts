@@ -31,7 +31,7 @@ const HouseSchema: Schema<Houses> = new Schema({
     },
     houseImage: {
         type: String,
-        required: [true, "Please enter a House Image"],
+        // required: [true, "Please enter a House Image"],
         trim: true,
     },
     houseRentage: {
@@ -42,11 +42,6 @@ const HouseSchema: Schema<Houses> = new Schema({
     houseLocation: {
         type: String,
         required: [true, "Please enter the house Location"],
-        trim: true,
-    },
-    houseTypes: {
-        type: String,
-        required: [true, "Please enter the house Model e.g Duplex, Bungalows"],
         trim: true,
     },
     agentname: {

@@ -10,9 +10,9 @@ import mongoose from "mongoose";
 // Post Houses:
 export const PostHouses = AsyncHandler(
     async(req: Request, res: Response, next: NextFunction): Promise<Response> =>{
-        const {houseName, houseDescription, housePrice, bedrooms, bathrooms, houseImage, houseRentage, houseLocation, houseTypes, agentname} = req.body;
+        const {houseName, houseDescription, housePrice, bedrooms, bathrooms, houseImage, houseRentage, houseLocation, agentname} = req.body;
 
-        const cloud_Img = await cloudinary.uploader.upload(req?.file!.path);
+        // const cloud_Img = await cloudinary.uploader.upload(req?.file!.path);
 
         const Agent = await AgentsModel.findById(req.params.agenthouseID)
 
@@ -32,10 +32,10 @@ export const PostHouses = AsyncHandler(
             housePrice,
             bedrooms,
             bathrooms,
-            houseImage: cloud_Img.secure_url,
+            // houseImage: cloud_Img.secure_url,
+            houseImage,
             houseRentage,
             houseLocation,
-            houseTypes,
             agentname: Agent?.name,
         })
         if (!house) {
@@ -49,7 +49,7 @@ export const PostHouses = AsyncHandler(
         }
         Agent?.houses.push(new mongoose.Types.ObjectId(house._id));
         Agent?.save();
-        
+
         return res.status(HttpCode.CREATED).json({
             message: "Sucessfully posted a house",
             data: house
