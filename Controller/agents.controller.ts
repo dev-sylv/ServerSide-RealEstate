@@ -129,3 +129,12 @@ export const OneAgent = AsyncHandler(
     }
 )
 
+// Delete all agents:
+export const DeleteAllAgents = AsyncHandler(
+    async(req: Request, res: Response, next: NextFunction): Promise<Response> =>{
+        const agents = await AgentsModel.deleteMany();
+        return res.status(HttpCode.OK).json({
+            message: "Successfully deleted"
+        })
+    }
+)
