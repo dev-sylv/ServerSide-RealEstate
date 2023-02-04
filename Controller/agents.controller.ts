@@ -24,7 +24,7 @@ export const RegisterAgents = AsyncHandler(
         const saltedPassword = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, saltedPassword);
 
-        const cloud_Img = await cloudinary.uploader.upload(req?.file!.path)
+        const cloud_Img = await cloudinary.uploader.upload(req?.file!.path);
         const agents = await AgentsModel.create({
             name,
             email,
@@ -112,7 +112,7 @@ export const GetAgents = AsyncHandler(
 // Get one agents:
 export const OneAgent = AsyncHandler(
     async(req: Request, res: Response, next: NextFunction): Promise<Response> =>{
-        const agent = await AgentsModel.findById(req.params.id);
+        const agent = await AgentsModel.findById(req.params.agentID);
         if (!agent) {
             next(
                 new AppError({

@@ -5,7 +5,7 @@ import { LoginValidation, RegisterValidation } from "../MiddleWares/Validation/A
 const router = express.Router();
 
 router.route("/getallagents").get(GetAgents);
-router.route("/getoneagent").get(OneAgent);
+router.route("/getoneagent/:agentID").get(OneAgent);
 router.route("/registeragents").post(RegisterValidation, RegisterAgents)
 router.route("/loginagent").post(LoginValidation, AgentsLogin);
 
