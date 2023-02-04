@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import { AppConfig } from "./app";
 import { DBconnect } from "./Config/DB";
 
-const port = 2080;
+const port: string | number = 2080 || process.env.port;
 
 dotenv.config();
 
