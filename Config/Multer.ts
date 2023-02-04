@@ -29,6 +29,6 @@ const houseUploads = multer({
 
 const agentsUpload = multer({
     storage: storage
-}).single("agentImage");
+}).single("image");
 
 export {agentsUpload, houseUploads};
