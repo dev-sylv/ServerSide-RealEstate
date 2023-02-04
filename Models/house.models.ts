@@ -1,5 +1,5 @@
 import { model, Schema, Document } from "mongoose";
-import { agentData, houseData } from "./AllInterface";
+import { houseData } from "./AllInterface";
 
 interface Houses extends Document, houseData{};
 
