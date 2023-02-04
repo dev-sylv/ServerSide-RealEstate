@@ -11,12 +11,11 @@ export interface houseData{
     agentname: string
 }
 
-export interface agents {
+export interface agentData {
     agentname: string;
     agentbio: string;
     agentPicture: string;
     agentemail: string;
     agentpassword: string;
-    houses: {}[];
-    isAdmin: boolean
+    houses: {}[]
 }
