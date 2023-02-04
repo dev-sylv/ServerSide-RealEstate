@@ -30,7 +30,7 @@ const AgentSchema: Schema<Agents> = new Schema({
     },
     image: {
         type: String,
-        required: [true, "Please enter your image for identification"],
+        // required: [true, "Please enter your image for identification"],
     },
     houses: [
         {

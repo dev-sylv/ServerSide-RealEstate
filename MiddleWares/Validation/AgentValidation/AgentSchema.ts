@@ -6,11 +6,10 @@ export const AgentSchemaValidation = ({
     Register: Joi.object({
         name: Joi.string().required(),
         email: Joi.string().email().required(),
-        password: Joi.string().min(6).required(),
-        confirmPassword: Joi.string().required().valid(Joi.ref("password"))
+        password: Joi.string().min(8).required()
     }),
     Login: Joi.object({
         email: Joi.string().email().required(),
-        password: Joi.string().min(6).required(),
+        password: Joi.string().min(8).required(),
     })
 })

@@ -1,7 +1,6 @@
-import express, {NextFunction, Request, Response} from "express";
+import {NextFunction, Request, Response} from "express";
 import { AsyncHandler } from "../Utils/AsyncHandler";
 import AgentsModel from "../Models/agents.models";
-import { agentData } from "../Models/AllInterface";
 import bcrypt from "bcrypt";
 import { AppError, HttpCode } from "../Utils/AppError";
 import cloudinary from "../Config/Cloudinary";
@@ -24,12 +23,13 @@ export const RegisterAgents = AsyncHandler(
         const saltedPassword = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, saltedPassword);
 
-        const cloud_Img = await cloudinary.uploader.upload(req?.file!.path);
+        // const cloud_Img = await cloudinary.uploader.upload(req!.file!.path);
         const agents = await AgentsModel.create({
             name,
             email,
             password: hashedPassword,
-            image: cloud_Img.secure_url,
+            // image: cloud_Img.secure_url,
+            image,
             bio,
         })
 
