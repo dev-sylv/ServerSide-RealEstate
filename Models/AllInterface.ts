@@ -7,7 +7,6 @@ export interface houseData{
     houseImage: string;
     houseRentage: string;
     houseLocation: string;
-    houseTypes: string;
     agentname: string
 }
 
