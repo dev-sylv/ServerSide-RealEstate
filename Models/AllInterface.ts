@@ -12,10 +12,10 @@ export interface houseData{
 }
 
 export interface agentData {
-    agentname: string;
-    agentbio: string;
-    agentPicture: string;
-    agentemail: string;
-    agentpassword: string;
+    name: string;
+    email: string;
+    password: string;
+    bio: string;
+    image: string;
     houses: {}[]
 }
