@@ -51,8 +51,8 @@ export const RegisterAgents = AsyncHandler(
 // Login Agents: 
 export const AgentsLogin = AsyncHandler(
     async(req: Request, res: Response, next: NextFunction): Promise<Response> =>{
-        const { email, password } = req.body;
-        if (!email || !password) {
+        const { email } = req.body;
+        if (!email) {
             next(
                 new AppError({
                     message: "Empty fields",
@@ -71,17 +71,7 @@ export const AgentsLogin = AsyncHandler(
                 })
             )
         }
-        const checkPassword = await bcrypt.compare(password, agent!.password);
-        if (!checkPassword) {
-            next(
-                new AppError({
-                    message: "Either Email or Password is not correct",
-                    httpCode: HttpCode.UNAUTHORIZED,
-                    name: AppError.name
-                })
-            )
-        }
-        return res.status(HttpCode.FOUND).json({
+        return res.status(HttpCode.OK).json({
             message: `Welcome ${agent?.name}`
         })
     }
@@ -90,7 +80,11 @@ export const AgentsLogin = AsyncHandler(
 // Get All Agents:
 export const GetAgents = AsyncHandler(
     async(req: Request, res: Response, next: NextFunction): Promise<Response> =>{
-        const agents = await AgentsModel.find().sort({createdAt: -1});
+        const agents = await AgentsModel.find().populate(
+            {
+                path: "houses"
+            }
+        ).sort({createdAt: -1});
         if (!agents) {
             next(
                 new AppError({
