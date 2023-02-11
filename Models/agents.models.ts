@@ -25,7 +25,7 @@ const AgentSchema: Schema<Agents> = new Schema({
     },
     bio: {
         type: String,
-        default: "I am an Agent and i sell afordable houses and lands",
+        default: "I am an Agent and i sell affordable houses and lands",
         trim:  true
     },
     image: {
