@@ -12,7 +12,7 @@ export const PostHouses = AsyncHandler(
     async(req: Request, res: Response, next: NextFunction): Promise<Response> =>{
         const {houseName, houseDescription, housePrice, bedrooms, bathrooms, houseImage, houseRentage, houseLocation, agentname} = req.body;
 
-        const cloud_Img = await cloudinary.uploader.upload(req?.file!.path);
+        // const cloud_Img = await cloudinary.uploader.upload(req?.file!.path);
 
         const Agent = await AgentsModel.findById(req.params.agentID)
 
@@ -32,7 +32,7 @@ export const PostHouses = AsyncHandler(
             housePrice,
             bedrooms,
             bathrooms,
-            houseImage: cloud_Img.secure_url,
+            // houseImage: cloud_Img.secure_url,
             // houseImage,
             houseRentage,
             houseLocation,
@@ -73,7 +73,28 @@ export const GetHouse = AsyncHandler(
             )
         }
         return res.status(HttpCode.FOUND).json({
-            message: "Successfully got all agents",
+            message: `Successfully got all houses posted by ${house?.name}`,
+            data: house
+        })
+
+    }
+)
+export const getallhouse = AsyncHandler(
+    async(req: Request, res: Response, next: NextFunction): Promise<Response> =>{
+        const house = await AgentsModel.find().populate({
+            path: "houses"
+        });
+        if (!house) {
+            next(
+                new AppError({
+                    message: "No house found",
+                    httpCode: HttpCode.NOT_FOUND,
+                    name: AppError.name
+                })
+            )
+        }
+        return res.status(HttpCode.FOUND).json({
+            message: "Successfully got all houses",
             data: house
         })
 

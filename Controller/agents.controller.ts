@@ -23,12 +23,12 @@ export const RegisterAgents = AsyncHandler(
         const saltedPassword = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, saltedPassword);
 
-        const cloud_Img = await cloudinary.uploader.upload(req?.file!.path);
+        // const cloud_Img = await cloudinary.uploader.upload(req?.file!.path);
         const agents = await AgentsModel.create({
             name,
             email,
             password: hashedPassword,
-            image: cloud_Img.secure_url,
+            // image: cloud_Img.secure_url,
             bio,
         })
 
